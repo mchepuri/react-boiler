@@ -8,6 +8,7 @@ var HTMLWebpackPluginConfig =   new HTMLWebpackPlugin(
         inject: 'body'
     }
 );
+/* exports */
 module.exports = {
     entry :  './app/index.js',
     mode: 'development',
