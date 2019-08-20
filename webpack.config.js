@@ -17,20 +17,17 @@ module.exports = {
             test:/\.(js|jsx)$/,
             exclude : /node_modules/,
             loader: 'babel-loader',
-            options: {presets:["@babel/env"]}
+            options: {presets:["@babel/preset-env"]}
         }]
     },
     resolve: { extensions: ["*", ".js", ".jsx"] },
     output:{
         filename: 'bundle.js',
-        publicPath: "./dist/",
         path: path.resolve(__dirname , './dist')
     },
     devServer: {
-        contentBase : "./dist",
         port: 3000,
         hotOnly: true,
-        publicPath: "http://localhost:3000/dist/",
       },
     plugins:[
         new webpack.HotModuleReplacementPlugin()  ,HTMLWebpackPluginConfig
