@@ -1,26 +1,37 @@
 var path = require('path');
+const webpack = require("webpack");
 var HTMLWebpackPlugin = require('html-webpack-plugin');
-var HTMLWebpackPluginCoonfig =   new HTMLWebpackPlugin(
+var HTMLWebpackPluginConfig =   new HTMLWebpackPlugin(
     {
-        template: __dirname  + '/app/index.html',
+        template: './app/index.html',
         filename: 'index.html',
         inject: 'body'
     }
 );
 module.exports = {
-    entry : __dirname + '/app/index.js',
+    entry :  './app/index.js',
+    mode: 'development',
     module:{
         rules:[{
-            test:/\.js$/,
+            test:/\.(js|jsx)$/,
             exclude : /node_modules/,
-            loader: 'babel-loader'
+            loader: 'babel-loader',
+            options: {presets:["@babel/env"]}
         }]
     },
+    resolve: { extensions: ["*", ".js", ".jsx"] },
     output:{
-        filename: 'build.js',
-        path: __dirname + '/build'
+        filename: 'bundle.js',
+        publicPath: "./dist/",
+        path: path.resolve(__dirname , './dist')
     },
+    devServer: {
+        contentBase : "./dist",
+        port: 3000,
+        hotOnly: true,
+        publicPath: "http://localhost:3000/dist/",
+      },
     plugins:[
-        HTMLWebpackPluginCoonfig  
+        new webpack.HotModuleReplacementPlugin()  ,HTMLWebpackPluginConfig
     ]
 };
