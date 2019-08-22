@@ -21,8 +21,9 @@ module.exports = {
             options: {presets:["@babel/preset-env"]}
         },
         {
-            test: /\.css$/i,
-            use: ['style-loader', 'css-loader'],
+            test: /\.(scss|css)$/i,
+            exclude : /node_modules/,
+            use: ['style-loader', 'css-loader','sass-loader'],
         }
         ]
     },
