@@ -12,17 +12,24 @@ var HTMLWebpackPluginConfig =   new HTMLWebpackPlugin(
 module.exports = {
     entry :  './app/index.js',
     mode: 'development',
+    
     module:{
         rules:[{
             test:/\.(js|jsx)$/,
             exclude : /node_modules/,
             loader: 'babel-loader',
             options: {presets:["@babel/preset-env"]}
-        }]
+        },
+        {
+            test: /\.css$/i,
+            use: ['style-loader', 'css-loader'],
+        }
+        ]
     },
     resolve: { extensions: ["*", ".js", ".jsx"] },
     output:{
         filename: 'bundle.js',
+        chunkFilename: '[name].bundle.js',
         path: path.resolve(__dirname , './dist')
     },
     devServer: {

@@ -3,7 +3,7 @@
 # production
 /build
 /dist
-
+/itunes
 # misc
 .DS_Store
 .env
