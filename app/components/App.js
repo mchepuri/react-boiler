@@ -1,14 +1,18 @@
 import React,{Suspense} from 'react';
 //import Cards from '../../itunes/Cards';
-import styles from '../styles/app.scss';
+import styles from './app.style.js';
 class App extends React.Component {
         constructor(props) {
                 super(props);
         }
         render() {
+                console.log(styles);
                 return (
-                        <div className={styles.app}>
-                                <div className={styles.sassyDiv}>Get Sassy!</div>
+                        <div>
+                        <style jsx>{styles}</style>
+                        <div className='app'>
+                                <div className='sassyDiv' >Get Sassy!</div>
+                        </div>
                         </div>
                 );
         }
