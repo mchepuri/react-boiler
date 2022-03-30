@@ -13,7 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.7",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "styled-jsx-plugin-postcss": "^2.0.1"
