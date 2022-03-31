@@ -1,9 +1,9 @@
 var path = require('path');
 const webpack = require("webpack");
-var HTMLWebpackPlugin = require('html-webpack-plugin');
+const HTMLWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
-var HTMLWebpackPluginConfig =   new HTMLWebpackPlugin(
+const HTMLWebpackPluginConfig =   new HTMLWebpackPlugin(
     {
         template: './app/index.html',
         filename: 'index.html',
@@ -25,8 +25,8 @@ module.exports = {
         {
             test: /\.(scss|sass|css)$/i,
             exclude : /node_modules/,
-            //use: ['style-loader', 'css-loader','sass-loader'],
-            loaders: [
+            //use: [MiniCssExtractPlugin.loader,'style-loader', 'css-loader','sass-loader'],
+            /*loaders: [
                'style-loader',
                 MiniCssExtractPlugin.loader,
                 {
@@ -38,7 +38,8 @@ module.exports = {
                   }
                 },
               'sass-loader',
-              ]
+              ]*/
+              use: [MiniCssExtractPlugin.loader, "css-loader"],
         }
         ]
     },
@@ -50,10 +51,9 @@ module.exports = {
     },
     devServer: {
         port: 3000,
-        hotOnly: true,
       },
     plugins:[
-        new webpack.HotModuleReplacementPlugin()  ,HTMLWebpackPluginConfig,
+        new webpack.HotModuleReplacementPlugin() ,HTMLWebpackPluginConfig,
         new MiniCssExtractPlugin({
             filename: '[name].css' ,
             chunkFilename: '[id].css',
