@@ -1,21 +1,9 @@
 import React,{Suspense} from 'react';
-//import Cards from '../../itunes/Cards';
-import styles from './app.style.js';
-class App extends React.Component {
-        constructor(props) {
-                super(props);
-        }
-        render() {
-                console.log(styles);
-                return (
-                        <div>
-                        <style jsx>{styles}</style>
-                        <div className='app'>
-                                <div className='sassyDiv' >Get Sassy!</div>
-                        </div>
-                        </div>
-                );
-        }
-
+import './app.css';
+export  const App = () =>{
+        return(
+        <div className="box"> Your components goes here</div>
+        );
 }
-export default App;
+
+export default  App;

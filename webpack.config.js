@@ -14,43 +14,29 @@ const HTMLWebpackPluginConfig =   new HTMLWebpackPlugin(
 module.exports = {
     entry :  './app/index.js',
     mode: 'development',
-    
+    output:{
+      filename: 'index.bundle.js',
+      chunkFilename: '[name].bundle.js',
+      path: path.resolve(__dirname , './dist')
+      },
     module:{
         rules:[{
             test:/\.(js|jsx)$/,
             exclude : /node_modules/,
             loader: 'babel-loader',
-            options: {presets:["@babel/preset-env"]}
+            options: {presets:["@babel/preset-env","@babel/preset-react"]}
         },
         {
             test: /\.(scss|sass|css)$/i,
             exclude : /node_modules/,
-            //use: [MiniCssExtractPlugin.loader,'style-loader', 'css-loader','sass-loader'],
-            /*loaders: [
-               'style-loader',
-                MiniCssExtractPlugin.loader,
-                {
-                  loader: 'css-loader?modules=true',
-                  options: {
-                    modules: true,
-                    sourceMap: true,
-                    importLoaders: 1
-                  }
-                },
-              'sass-loader',
-              ]*/
-              use: [MiniCssExtractPlugin.loader, "css-loader"],
+            use: [MiniCssExtractPlugin.loader, 'css-loader','sass-loader'],
         }
-        ]
+        ] 
     },
     resolve: { extensions: ["*", ".js", ".jsx"] },
-    output:{
-        filename: 'bundle.js',
-        chunkFilename: '[name].bundle.js',
-        path: path.resolve(__dirname , './dist')
-    },
+   
     devServer: {
-        port: 3000,
+        port: 3000
       },
     plugins:[
         new webpack.HotModuleReplacementPlugin() ,HTMLWebpackPluginConfig,
