@@ -1,5 +1,5 @@
 import { createStore } from 'redux'
-import cartReducer from './cart_reducer'
+import _reducer from './_reducer'
 
 let preloadedState
 const persistedCartString = localStorage.getItem('cart')
@@ -10,5 +10,5 @@ if (persistedCartString) {
   }
 }
 
-const store = createStore(cartReducer,preloadedState);
+const store = createStore(_reducer,preloadedState);
 export default store;
