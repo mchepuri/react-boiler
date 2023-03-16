@@ -2,7 +2,7 @@ const initialState = {
     itemCount : 0
 }
 
-const  cartReducer = (state = initialState, action) => {
+const  _reducer = (state = initialState, action) => {
   switch (action.type) {
 
   case 'cart/itemAdded':
@@ -12,4 +12,4 @@ const  cartReducer = (state = initialState, action) => {
     return state
   }
 }
-export default cartReducer;
+export default _reducer;
