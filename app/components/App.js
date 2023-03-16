@@ -14,7 +14,7 @@ export  const App = () =>{
         <div className="app"> 
                 {/*Change me*/}
                 <Provider store={store}>
-                        <Shell logo={<img className="logo" src="https://static.rdc.moveaws.com/images/logos/rdc-logo-default.svg"/>}
+                        <Shell logo={<img className="logo" src=""/>}
                                 menu={<Navigation/>}
                                 identitySection={ <IdentitySection/>}
                                 hamburger={<Hamburger/>}>

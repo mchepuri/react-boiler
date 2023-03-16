@@ -3,9 +3,9 @@ import './nav.css';
 export  const Navigation = (props) =>{
     return(
         <ul className="gnavmenu">
-            <li className="gnavmenuitem"> Buy </li>
-            <li className="gnavmenuitem"> Sell </li>
-            <li className="gnavmenuitem"> Mortgage </li>
+            <li className="gnavmenuitem"> Menu-1  </li>
+            <li className="gnavmenuitem"> Menu-1 </li>
+            <li className="gnavmenuitem"> Menu-1 </li>
         </ul>
     );
 }

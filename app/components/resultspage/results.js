@@ -7,5 +7,5 @@ export  const Results = () =>{
     const handleClick = () =>{
         store.dispatch({type:'cart/itemAdded',payload:1});
     }
-    return(<div className="button" onClick={handleClick}>Add To Cart</div>);
+    return(<div className="button" onClick={handleClick}>Some Button</div>);
 }
