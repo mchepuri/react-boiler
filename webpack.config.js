@@ -21,19 +21,41 @@ module.exports = {
       },
     module:{
         rules:[{
-            test:/\.(js|jsx)$/,
+            test:/\.(js|jsx|ts|tsx)$/,
             exclude : /node_modules/,
             loader: 'babel-loader',
-            options: {presets:["@babel/preset-env","@babel/preset-react"]}
+            options: {presets:["@babel/preset-env","@babel/preset-react","@babel/preset-typescript"]}
         },
+        /*{
+          test:/\.(ts|tsx)$/,
+          exclude : /node_modules/,
+          loader: 'ts-loader'
+        },*/
         {
             test: /\.(scss|sass|css)$/i,
             exclude : /node_modules/,
             use: [MiniCssExtractPlugin.loader, 'css-loader','sass-loader'],
-        }
+        },
+         // intercept svg and use svgr to convert them to React Components
+        {
+            test: /\.svg/,
+            //use: ["@svgr/webpack","svgo-loader"],
+            use: ["svg-url-loader"],
+        },
+        {
+            test: /\.(jpe?g|gif|png)$/i,
+            use: [
+            {
+              loader: 'url-loader',
+              options: {
+                limit: 10000
+              }
+            }
+          ]
+        }         
         ] 
     },
-    resolve: { extensions: ["*", ".js", ".jsx"] },
+    resolve: { extensions: [".*", ".ts",".tsx",".js", ".jsx"] },
    
     devServer: {
         port: 3000
