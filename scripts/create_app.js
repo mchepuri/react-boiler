@@ -1,6 +1,7 @@
 const fs = require('fs');
 const pck =require('../package.json');
 const prompt = require('prompt-sync')();
+const { exec } = require("child_process");
 
 let folderName = '../';
 const src = './';
@@ -33,6 +34,18 @@ const start = (settings) =>{
     }
 }
 const readProjectSettings = async () =>{
+    /*console.log('Installing packages')
+    exec(' cd .. npm i',(error, stdout, stderr) => {
+        if (error) {
+            console.log(`error: ${error.message}`);
+            return;
+        }
+        if (stderr) {
+            console.log(`stderr: ${stderr}`);
+            return;
+        }
+        console.log(`stdout: ${stdout}`);
+    });*/
     pck.name = prompt('Application Name? : ');
     folderName = folderName+pck.name;
     pck.description = prompt('Do you want to add description? <Enter to leave it blank : ');
