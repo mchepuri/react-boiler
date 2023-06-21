@@ -1,24 +1,45 @@
-const readline = require('readline').createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
+const fs = require('fs');
+const pck =require('../package.json');
+const prompt = require('prompt-sync')();
 
-const askQuestion  = async (q) => {
-    return new Promise((resolve,reject)=>{
-    readline.question(q, answer => {
-        console.log(`Answer: ${answer}!`);
-        readline.close();
-        resolve(answer);
-      });
-  })
+let folderName = '../';
+const src = './';
+
+const start = (settings) =>{
+    try {
+        if (!fs.existsSync(folderName)) {
+        console.log('\nCreating project folder');
+        fs.mkdirSync(folderName);
+        console.log(`No ${folderName} folder.. creating it`);
+        fs.cp(src+'app', folderName+'/app/', {recursive: true}, (err) => {console.log(err)});
+        fs.copyFile(src+'.babelrc', folderName+'/.babelrc', (err) => {console.log(err)});
+        fs.copyFile(src+'.dockerignore', folderName+'/.dockerignore',  (err) => {console.log(err)});
+        fs.copyFile(src+'.gitignore', folderName+'/.gitignore',  (err) => {console.log(err)});
+        fs.copyFile(src+'webpack.config.js', folderName+'/webpack.config.js', (err) => {console.log(err)});
+        }
+        else{
+            console.log('folder exists');
+        }
+    } catch (err) {
+        console.error(err);
+    }
+
+    try{
+        console.log('\nApplying project settings!..')
+        fs.writeFileSync(folderName+'/package.json',JSON.stringify(pck,null,2));
+        console.log('\nApplying project settings - DONE')
+    }catch(error) {
+        console.log(error);
+    }
 }
-
 const readProjectSettings = async () =>{
-    const app_name = await askQuestion('Application Name?');
-    const description = await askQuestion('Do you want to add description? <Enter to leave it blank');
-    const git_hub_url = await askQuestion('git hub Url? <Enter to leave it blank');
-    const author = await askQuestion('Author? <Enter to leave it blank');
-    console.log('askAllQs  resp',resp);
+    pck.name = prompt('Application Name? : ');
+    folderName = folderName+pck.name;
+    pck.description = prompt('Do you want to add description? <Enter to leave it blank : ');
+    pck.author = prompt('Author? <Enter to leave it blank> : ');
+    pck.license = prompt('License? <Enter to leave it blank> : ');
+    start();
+    console.log(`Done! Your boiler plate is ready!. \nPlease switch to ${folderName} and start with 'npm i' and then 'npm run start' `);
 }
 
 readProjectSettings();
