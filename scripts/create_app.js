@@ -7,6 +7,7 @@ let folderName = '../';
 const src = './';
 
 const start = (settings) =>{
+    
     try {
         if (!fs.existsSync(folderName)) {
         console.log('\nCreating project folder');
@@ -20,9 +21,11 @@ const start = (settings) =>{
         }
         else{
             console.log('folder exists');
+            return'failed';
         }
     } catch (err) {
         console.error(err);
+        return 'failed';
     }
 
     try{
@@ -31,7 +34,9 @@ const start = (settings) =>{
         console.log('\nApplying project settings - DONE')
     }catch(error) {
         console.log(error);
+        return 'failed';
     }
+    return 'success';
 }
 const readProjectSettings = async () =>{
     pck.name = prompt('Application Name? : ');
@@ -39,7 +44,11 @@ const readProjectSettings = async () =>{
     pck.description = prompt('Do you want to add description? <Enter to leave it blank : ');
     pck.author = prompt('Author? <Enter to leave it blank> : ');
     pck.license = prompt('License? <Enter to leave it blank> : ');
-    start();
+    let status = start();
+    if(status==='failed'){
+        console.warn('Oops something went wrong. Please check above error logs and rerun after fixing the issue');
+        return;
+    }
     console.log(`Done! Your boiler plate is ready!. \nPlease switch to ${folderName} and start with 'npm i' and then 'npm run start' `);
 }
 
