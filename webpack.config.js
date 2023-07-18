@@ -3,6 +3,8 @@ const webpack = require("webpack");
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
+
+
 const HTMLWebpackPluginConfig =   new HTMLWebpackPlugin(
     {
         template: './app/index.html',
@@ -12,13 +14,22 @@ const HTMLWebpackPluginConfig =   new HTMLWebpackPlugin(
 );
 /* exports */
 module.exports = {
-    entry :  './app/index.js',
-    mode: 'development',
+    entry :   { bundle : path.resolve(__dirname ,'./app/index.js') },
+    mode : process.env.NODE_ENV || 'development',
     output:{
-      filename: 'index.bundle.js',
-      chunkFilename: '[name].bundle.js',
+      filename: '[name].js',
+      chunkFilename: '[name].[contenthash].chunk.js',
       path: path.resolve(__dirname , './dist')
-      },
+    },
+    optimization: {
+      chunkIds: "named",
+      splitChunks: {
+          chunks: "all",
+          name: "vendors",
+          minSize: 10000,
+          maxSize: 250000,
+        },
+    },
     module:{
         rules:[{
             test:/\.(js|jsx|ts|tsx)$/,
@@ -26,11 +37,11 @@ module.exports = {
             loader: 'babel-loader',
             options: {presets:["@babel/preset-env","@babel/preset-react","@babel/preset-typescript"]}
         },
-        /*{
+        {
           test:/\.(ts|tsx)$/,
           exclude : /node_modules/,
           loader: 'ts-loader'
-        },*/
+        },
         {
             test: /\.(scss|sass|css)$/i,
             exclude : /node_modules/,
